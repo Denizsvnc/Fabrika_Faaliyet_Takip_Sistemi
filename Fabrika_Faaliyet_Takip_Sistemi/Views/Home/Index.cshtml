@@ -1,0 +1,58 @@
+﻿@model List<Fabrika_Faaliyet_Takip_Sistemi.Models.LogEntry>
+
+@{
+    ViewData["Title"] = "Fabrika Faaliyet Takip Sistemi";
+}
+<head>
+    <meta http-equiv="refresh" content="60">
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fabrika Faaliyet Takip Sistemi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col items-center p-6">
+    <div class="w-full max-w-4xl bg-gray-800 rounded-2xl shadow-xl p-6 space-y-6">
+        <h1 class="text-2xl font-bold text-center text-indigo-400">Üretim Takip Paneli</h1>
+
+        <!-- Kontroller           Başla ve Dur Butonları - TextBox ve Ekle Butonu-->
+        <div class="flex flex-wrap justify-between gap-4">
+            <form method="post" asp-action="Basla">
+                <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-xl shadow">Başla</button>
+            </form>
+
+            <form method="post" asp-action="Dur" class="class=" bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-xl shadow"">
+                <input type="text" id="durusNedeni" name="durusNedeni" placeholder="Duruş nedeni giriniz..." class="flex-grow px-4 py-2 rounded-xl bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-xl shadow">Dur</button>
+            </form>
+        </div>
+        <!-- Tablo -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full table-auto text-sm rounded-xl overflow-hidden shadow-md">
+                <thead class="bg-gray-700 text-indigo-300">
+                    <tr>
+                        <th class="px-4 py-2 text-left">Kayıt No</th>
+                        <th class="px-4 py-2 text-left">Başlangıç</th>
+                        <th class="px-4 py-2 text-left">Bitiş</th>
+                        <th class="px-4 py-2 text-left">Toplam Süre</th>
+                        <th class="px-4 py-2 text-left">Statü</th>
+                        <th class="px-4 py-2 text-left">Duruş Nedeni</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-gray-800 text-gray-100">
+                    @foreach (var log in Model)
+                    {
+                        <tr class="border-t border-gray-700 hover:bg-gray-700/40">
+                            <td class="px-4 py-2">@log.KayitNo</td>
+                            <td class="px-4 py-2">@log.BaslangicZamani</td>
+                            <td class="px-4 py-2">@log.DurusZamani</td>
+                            <td class="px-4 py-2">@log.ToplamSure</td>
+                            <td class="px-4 py-2">@log.Statu</td>
+                            <td class="px-4 py-2">@log.DurusNedeni</td>
+                        </tr>
+                    }   
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
